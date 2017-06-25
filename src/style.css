@@ -1,9 +1,0 @@
-body {
-  background: red;
-  transition: all 2s ease-in-out;
-}
-
-.hello {
-  color: red;
-  background: url('../public/icon.png');
-}

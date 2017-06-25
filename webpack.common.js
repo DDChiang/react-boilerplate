@@ -41,11 +41,22 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.jsx$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
+      template: './src/index.html',
       title: 'Test App Title'
     }),
     new ExtractTextPlugin('styles.css'),

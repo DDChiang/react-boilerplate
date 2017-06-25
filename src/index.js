@@ -1,11 +1,6 @@
-import './style.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-function sayHello() {
-  var elem = document.createElement('div');
+import App from './containers/App';
 
-  elem.innerHTML = 'hello webpack5 :)';
-
-  return elem;
-}
-
-document.body.append(sayHello());
+ReactDOM.render(<App/>, document.getElementById('root'));
