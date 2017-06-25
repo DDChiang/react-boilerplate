@@ -1,0 +1,7 @@
+node_modules
+dist
+yarn.lock
+build
+npm-debug.log
+.DS_Store
+.git
