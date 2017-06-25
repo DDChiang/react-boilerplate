@@ -6,7 +6,8 @@ const commonConfig = require('./webpack.common.js');
 
 const mergedConfig = merge(commonConfig, {
   // https://webpack.github.io/docs/configuration.html#devtool
-  devtool: 'inline-source-map',
+  // devtool: 'eval-cheap-module-source-map',
+  devtool: 'source-map',
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
