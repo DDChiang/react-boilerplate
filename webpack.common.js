@@ -5,14 +5,18 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  context: path.resolve(__dirname, 'src'),
+  entry: {
+    app: './index.js' // somehow this needs ./ prefix
+  },
   output: {
     // Note Export by setting a variable: var Library = xxx (default)
     // Must do this else this module will be exported as an empty {}
     // Res: https://webpack.github.io/docs/configuration.html#output-librarytarget
-    libraryTarget: "var",
-  },
-  entry: {
-    app: './src/index.js'
+    libraryTarget: 'var',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash].js',
+    sourceMapFilename: '[name].map'
   },
   module: {
     rules: [
@@ -56,12 +60,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: 'index.html', // somehow this does NOT need ./ prefix
       title: 'Test App Title'
     }),
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
+      filename: 'vendor-[hash].min.js',
       minChunks: (module) => {
         // this assumes your vendor imports exist in the node_modules directory
         return module.context && module.context.indexOf('node_modules') !== -1;
