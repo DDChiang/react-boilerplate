@@ -3,13 +3,58 @@ const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
 const commonConfig = require('./webpack.common.js');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = merge(commonConfig, {
   // https://webpack.github.io/docs/configuration.html#devtool
   // devtool: 'eval-cheap-module-source-map',
   devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            // for writing files to disk (for local development use only)
+            loader: 'cache-loader',
+            options: {
+              // provide a cache directory where cache items should be stored
+              cacheDirectory: path.resolve('.cache')
+            }
+          },
+          'babel-loader'
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
+          ]
+        })
+      }
+    ]
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // Enable HMR
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
   ],
   devServer: {
     port: 1888,

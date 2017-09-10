@@ -50,11 +50,6 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
       }
     ]
   },
@@ -63,7 +58,7 @@ module.exports = {
       template: 'index.html', // somehow this does NOT need ./ prefix
       title: 'Test App Title'
     }),
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('[name]-[contentHash].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'vendor-[hash].min.js',
