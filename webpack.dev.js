@@ -53,11 +53,14 @@ module.exports = merge(commonConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // Enable HMR
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+        HAS_REDUX_DEV_TOOLS: true
+      },
     })
   ],
   devServer: {
-    port: 1888,
+    port: 1800,
     historyApiFallback: true,
     hot: true, // Tell dev server we're using HMR
     contentBase: path.resolve(__dirname, 'dist'),
