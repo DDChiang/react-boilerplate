@@ -28,9 +28,6 @@ module.exports = {
             'css-loader',
             {
               loader: 'postcss-loader',
-              options: {
-                plugins: [autoprefixer]
-              }
             }
           ]
         })
