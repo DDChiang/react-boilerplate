@@ -3,15 +3,26 @@
     "transform-class-properties",
     "babel-plugin-transform-runtime",
     "transform-decorators-legacy",
+    "lodash"
   ],
   "presets": [
-    "es2015",
     "react",
+    ["env", {
+      "targets": {
+        "browsers": [
+          "last 2 versions", "ie >= 8"
+        ]
+      },
+      "useBuiltIns": true
+    }],
     "stage-0"
   ],
   "env": {
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
+    },
+    "production": {
+      "plugins": ["transform-react-remove-prop-types"]
     }
   }
 }

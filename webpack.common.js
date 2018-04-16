@@ -3,6 +3,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, './src'),
@@ -54,6 +55,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html', // somehow this does NOT need ./ prefix
       title: 'Test App Title'
+    }),
+    new LodashModuleReplacementPlugin({
+      shorthands: true, // For "iteratee is not a function" error
+      collections: true,
+      paths: true,
+      flattening: true, // "funcs.reverse is not a function" error in Win 7 && Win 10
     }),
     new ExtractTextPlugin('[name]-[contentHash].css'),
     new webpack.optimize.CommonsChunkPlugin({
